@@ -22,14 +22,19 @@
 include '../vendor/autoload.php';
 
 if (!isset($_GET['issue'])) {
-    return;
+    echo 'no issue';
+    die();
 }
 
 include_once '../.auth.php';
 
 $issueId = $_GET['issue'];
 
+$type = isset($_GET['type']) ? $_GET['type'] : 'html';
+
 $client = new YouTrack\Connection(YOUTRACK_URL, YOUTRACK_USERNAME, YOUTRACK_PASSWORD);
+
+$out = '';
 
 try {
     $issue = $client->getIssue($issueId);
@@ -48,13 +53,31 @@ try {
             $style = 'color: black;text-decoration: none;';
     }
 
-    echo '<span class="state_'.$state.'">';
-    echo '<a href="'.YOUTRACK_URL.'/issue/'.$issue->getId().'" style="font-size:small;font-family:arial;'.$style.'">';
-    echo '<img style="display:inline;margin-bottom:-3px;" src="'.YOUTRACK_URL.'/_classpath/images/youtrack16.png">';
-    echo '<span title="(State: '.$state.')"> ' . $issue->getId() . '</span>';
-    echo '</a>';
-    echo '</span>';
+    $out .= '<span class="youtrack-issue state_'.$state.'">';
+    $out .= '<a href="'.YOUTRACK_URL.'/issue/'.$issue->getId().'" style="font-size:small;font-family:arial;'.$style.'">';
+    $out .= '<img style="display:inline;" src="'.YOUTRACK_URL.'/_classpath/images/youtrack16.png">';
+    $out .= '<span title="(State: '.$state.')"> ' . $issue->getId() . '</span>';
+    $out .= '</a>';
+    $out .= '</span>';
 
 } catch (\Exception $e) {
-    echo 'Error';
+    $out .= 'Error';
+}
+
+if ($type == 'html') {
+    echo $out;
+} else if ($type == 'js') {
+
+    if (isset($_GET['callback'])) {
+        echo 'var issueData = ' . json_encode($out) . ';';
+        echo $_GET['callback'] . '(issueData);';
+    } else {
+        $data = [
+            $issueId => $out
+        ];
+        $json = json_encode($data);
+        echo $json;
+    }
+} else {
+    echo 'unknown type';
 }

@@ -12,5 +12,10 @@ Create a file `.auth.php` with
     define('YOUTRACK_URL', 'https://<username>.myjetbrains.com/youtrack');
     define('YOUTRACK_USERNAME', 'user');
     define('YOUTRACK_PASSWORD', 'password');
+    
+Run
+
+    php composer.phar self-update
+    php composer.phar update
 
 Make a webserver point to ./public/ and access the site via `http://example.com/?issue=ISSUE-123`.
