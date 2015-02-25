@@ -19,13 +19,13 @@
  * @link      >
  */
 
-include 'vendor/autoload.php';
+include '../vendor/autoload.php';
 
 if (!isset($_GET['issue'])) {
     return;
 }
 
-include_once '.auth.php';
+include_once '../.auth.php';
 
 $issueId = $_GET['issue'];
 
