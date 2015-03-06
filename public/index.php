@@ -53,10 +53,13 @@ try {
             $style = 'color: black;text-decoration: none;';
     }
 
+    $title = $issue->__get('summary');
+    $title = str_replace('"', '\\"', $title);
+
     $out .= '<span class="youtrack-issue state_'.$state.'">';
     $out .= '<a href="'.YOUTRACK_URL.'/issue/'.$issue->getId().'" style="font-size:small;font-family:arial;'.$style.'">';
     $out .= '<img style="display:inline;" src="'.YOUTRACK_URL.'/_classpath/images/youtrack16.png">';
-    $out .= '<span title="(State: '.$state.')"> ' . $issue->getId() . '</span>';
+    $out .= '<span title="'.$title.' (State: '.$state.')"> ' . $issue->getId() . '</span>';
     $out .= '</a>';
     $out .= '</span>';
 
