@@ -49,12 +49,15 @@ try {
         case 'Fixed':
             $style = 'color:grey;text-decoration: line-through;';
             break;
+        case 'To be discussed':
+            $style = 'color:red;';
+            break;
         default:
             $style = 'color: black;text-decoration: none;';
     }
 
     $title = $issue->__get('summary');
-    $title = str_replace('"', '\\"', $title);
+    $title = htmlspecialchars($title, ENT_QUOTES);
 
     $out .= '<span class="youtrack-issue state_'.$state.'">';
     $out .= '<a href="'.YOUTRACK_URL.'/issue/'.$issue->getId().'" style="font-size:small;font-family:arial;'.$style.'">';
