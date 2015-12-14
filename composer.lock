@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "890c16c7b73d50634b3bc733a2630a03",
+    "content-hash": "f55d28c547120a226182454b322bea75",
+    "packages": [
+        {
+            "name": "nepda/youtrack-client",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nepda/youtrack.git",
+                "reference": "f55b49970e16cedd84c34208b75315bdab9fc360"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nepda/youtrack/zipball/f55b49970e16cedd84c34208b75315bdab9fc360",
+                "reference": "f55b49970e16cedd84c34208b75315bdab9fc360",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": ">=1",
+                "lib-curl": ">=7",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/dbunit": ">=1.2",
+                "phpunit/php-invoker": "*",
+                "phpunit/phpunit": "5.*",
+                "phpunit/phpunit-selenium": ">=1.2",
+                "phpunit/phpunit-story": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "YouTrack\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-4-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nepomuk Fraedrich",
+                    "email": "info@nepda.eu"
+                }
+            ],
+            "description": "A PHP YouTrack client library",
+            "time": "2015-12-06 10:23:01"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "nepda/youtrack-client": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.5"
+    },
+    "platform-dev": []
+}
