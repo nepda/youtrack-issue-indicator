@@ -9,14 +9,10 @@
  * tel 0176 270 68 7 68
  * USt-IdNr.: DE287190901
  *
- * PHP Version >= 5.4
+ * PHP Version >= 5.6
  *
- * @category  >
- * @package   >
  * @author    Nepomuk Fraedrich <info@nepda.eu>
  * @copyright 2015 Nepomuk Fraedrich
- * @license   >
- * @link      >
  */
 
 include '../vendor/autoload.php';
@@ -59,20 +55,26 @@ try {
     $title = $issue->__get('summary');
     $title = htmlspecialchars($title, ENT_QUOTES);
 
-    $out .= '<span class="youtrack-issue state_' . $state . '">';
-    $out .= '<a href="' . YOUTRACK_URL . '/issue/' . $issue->getId() . '" style="font-size:small;font-family:arial;' . $style . '">';
+    $stateCls = str_replace(' ', '', $state);
+
+    $issueUrl = YOUTRACK_URL . '/issue/' . $issue->getId();
+
+    $out .= '<span class="youtrack-issue state_' . $stateCls . '">';
+    $out .= '<a href="' . $issueUrl . '" style="font-size:small;font-family:arial;' . $style . '">';
     $out .= '<img style="display:inline;" src="' . YOUTRACK_URL . '/_classpath/images/youtrack16.png">';
     $out .= '<span title="' . $title . ' (State: ' . $state . ')"> ' . $issue->getId() . '</span>';
     $out .= '</a>';
     $out .= '</span>';
 
 } catch (\Exception $e) {
-    $out .= 'Error';
+    $out .= 'Error (' . $e->getMessage() . ')';
 }
 
 if ($type == 'html') {
     echo $out;
-} else if ($type == 'js') {
+} elseif ($type == 'js') {
+
+    header('content-type: text/javascript');
 
     if (isset($_GET['callback'])) {
         echo 'var issueData = ' . json_encode($out) . ';';
